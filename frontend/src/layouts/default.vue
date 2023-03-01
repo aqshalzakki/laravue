@@ -1,6 +1,14 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterLink, RouterView, useRouter } from 'vue-router'
 import HelloWorld from '../components/HelloWorld.vue'
+import { useAuthStore } from '../stores/auth'
+
+const authStore = useAuthStore();
+const router = useRouter()
+
+const logout = () => {
+  authStore.logout().then(() => router.push('/login'))
+};
 </script>
 
 <template>
@@ -12,10 +20,17 @@ import HelloWorld from '../components/HelloWorld.vue'
         <HelloWorld msg="You did it lad!" />
   
         <nav>
-          <RouterLink to="/">Home</RouterLink>
-          <RouterLink to="/about">About</RouterLink>
-          <RouterLink to="/products/123">Products 123</RouterLink>
-          <RouterLink to="/login">Login</RouterLink>
+          <div>
+            <RouterLink to="/">Home</RouterLink>
+            <RouterLink to="/about">About</RouterLink>
+            <RouterLink v-if="authStore.isLoggedIn" to="/products">Products</RouterLink>
+          </div>
+          <div>
+            <VBtn color="error" v-if="authStore.isLoggedIn" @click.prevent="logout">Logout</VBtn>
+            <VBtn v-else color="info">
+              <RouterLink to="/login">Login</RouterLink>
+            </VBtn>
+          </div>
         </nav>
       </div>
     </header>
@@ -44,6 +59,9 @@ nav {
   width: 100%;
   text-align: center;
   margin-top: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 nav a.router-link-exact-active {

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\LoginController;
+use App\Http\Controllers\Api\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,22 +22,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
-    Route::get('/products', function (Request $request) {
-        return [
-            ['id' => 1, 'name' => 'laptop'],
-            ['id' => 2, 'name' => 'pc'],
-            ['id' => 3, 'name' => 'keyboard'],
-            ['id' => 4, 'name' => 'mouse'],
-        ];
-    });
-    Route::get('/products/{id}', function (Request $request) {
-        $products = [
-            ['id' => 1, 'name' => 'laptop'],
-            ['id' => 2, 'name' => 'pc'],
-            ['id' => 3, 'name' => 'keyboard'],
-            ['id' => 4, 'name' => 'mouse'],
-        ];
-    });
-
+    Route::resource('products', ProductController::class);
     Route::post('logout', [LoginController::class, 'logout']);
 });
