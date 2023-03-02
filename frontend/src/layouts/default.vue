@@ -3,7 +3,7 @@ import { RouterLink, RouterView, useRouter } from 'vue-router'
 import HelloWorld from '../components/HelloWorld.vue'
 import { useAuthStore } from '../stores/auth'
 
-const authStore = useAuthStore();
+const authStore = useAuthStore()
 const router = useRouter()
 
 const logout = () => {
@@ -15,10 +15,10 @@ const logout = () => {
   <div class="flexed">
     <header class="mb-5">
       <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-  
+
       <div class="wrapper">
-        <HelloWorld msg="You did it lad!" />
-  
+        <HelloWorld msg="Hello world!" />
+
         <nav>
           <div>
             <RouterLink to="/">Home</RouterLink>
@@ -26,15 +26,15 @@ const logout = () => {
             <RouterLink v-if="authStore.isLoggedIn" to="/products">Products</RouterLink>
           </div>
           <div>
-            <VBtn color="error" v-if="authStore.isLoggedIn" @click.prevent="logout">Logout</VBtn>
-            <VBtn v-else color="info">
-              <RouterLink to="/login">Login</RouterLink>
+            <VBtn variant="tonal" v-if="authStore.isLoggedIn" @click.prevent="logout">Logout</VBtn>
+            <VBtn v-else>
+              <RouterLink class="login-link" to="/login">Login</RouterLink>
             </VBtn>
           </div>
         </nav>
       </div>
     </header>
-  
+
     <router-view v-slot="{ Component, route }">
       <transition name="slide">
         <component :is="Component" :key="route" />
@@ -42,7 +42,6 @@ const logout = () => {
     </router-view>
   </div>
 </template>
-
 
 <style scoped>
 header {
@@ -81,6 +80,7 @@ nav a {
 nav a:first-of-type {
   border: 0;
 }
-
+.login-link {
+  color: #000 !important;
+}
 </style>
-

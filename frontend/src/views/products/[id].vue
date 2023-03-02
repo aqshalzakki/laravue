@@ -1,5 +1,5 @@
 <template>
-  <v-container >
+  <v-container>
     <div v-for="product in products" :key="product.id">
       <span>{{ product.id }}. {{ product.name }}</span>
     </div>
@@ -17,5 +17,5 @@ const products = ref([])
 onMounted(async () => {
   const { data } = await axios.get(`products`)
   products.value = data
-});
+})
 </script>

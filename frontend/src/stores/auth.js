@@ -10,11 +10,11 @@ export const useAuthStore = defineStore('auth', () => {
 
   // actions
 
-  const setUser = payload => {
+  const setUser = (payload) => {
     user.value = payload
   }
 
-  const setToken = payload => {
+  const setToken = (payload) => {
     token.value = payload
   }
 
@@ -27,7 +27,7 @@ export const useAuthStore = defineStore('auth', () => {
     user.value = {}
     token.value = ''
 
-    console.log(data);
+    console.log(data)
   }
 
   return { user, token, isLoggedIn, logout, setUser, setToken }

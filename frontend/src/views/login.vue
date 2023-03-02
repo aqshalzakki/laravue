@@ -1,8 +1,8 @@
 <script setup>
 import { ref, watch } from 'vue'
 import axios from '@/plugin/axios'
-import { useAuthStore } from '../stores/auth';
-import { useRouter } from 'vue-router';
+import { useAuthStore } from '../stores/auth'
+import { useRouter } from 'vue-router'
 
 const authStore = useAuthStore()
 const router = useRouter()
@@ -23,13 +23,12 @@ const login = async () => {
 
     router.push('/products/123')
   } catch (ex) {
-    console.log(ex);
+    console.log(ex)
     error.value = ex.response.data.message
   } finally {
     loading.value = false
   }
-
-};
+}
 </script>
 
 <template>
